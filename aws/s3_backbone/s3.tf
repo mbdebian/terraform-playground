@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "packtsection2main" {
+resource "aws_s3_bucket" "mbdebiantfmain" {
     bucket = "packt-terraform-section2-bucket"
     acl = "private"
 }
