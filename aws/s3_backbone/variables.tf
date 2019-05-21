@@ -4,15 +4,13 @@ variable "environment" {
 }
 
 
-variable "s3_bucket_name" {
-    default = "mbdebiantfsection2main"
-    description = "Name of the S3 bucket for backbone"
+variable "s3_bucket_prefix" {
+    description = "Prefix of the S3 bucket for backbone"
     type = "string"
 }
 
-variable "s3_regions" {
-    type = "list"
-    default = ["us-east-1", "us-east-2"]
+variable "s3_region" {
+    type = "string"
 }
 
 locals {
