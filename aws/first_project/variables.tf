@@ -28,6 +28,12 @@ variable "project_contact_email" {
   description = "Project main contact e-mail address"
 }
 
+variable "project_region" {
+  type = "string"
+  description = "This is the target region for this project"
+}
+
+
 locals {
   s3_bucket_devops_tags = {
     project_id = "${var.project_id}"
