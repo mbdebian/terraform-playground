@@ -43,6 +43,13 @@ variable "platform_bastion_instance_type" {
   description = "Instance type for the bastion host"
 }
 
+// Networking
+variable "vpc_cidr_block" {
+  type = "string"
+  description = "CIDR block definition for the project VPC"
+}
+
+
 // Locals, that allow interpolation
 locals {
   s3_bucket_devops_tags = {
