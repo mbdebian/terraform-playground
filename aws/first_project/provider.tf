@@ -9,7 +9,7 @@ terraform {
       # The name of the bucket here is not the ID of that bucket in the terraform files, but the real / final bucket name on S3
         bucket = "s3bucketdevopsterraform"
         key = "devops/terraform"
-        region = "${var.project_region}"
+        region = "us-east-1"
         encrypt = "true"
     }
 }
