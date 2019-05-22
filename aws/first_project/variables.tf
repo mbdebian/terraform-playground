@@ -33,7 +33,13 @@ variable "project_region" {
   description = "This is the target region for this project"
 }
 
+variable "s3_devops_bucket_name" {
+  default = "${var.s3_devops_prefix}-${var.project_id}-${var.project_region}"
+  type = "string"
+  description = "This is the name for the S3 bucket used for devops"
+}
 
+// Locals, that allow interpolation
 locals {
   s3_bucket_devops_tags = {
     project_id = "${var.project_id}"

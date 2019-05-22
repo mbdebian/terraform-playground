@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "s3bucketdevopsterraform" {
-  bucket = "${var.s3_devops_prefix}-${var.s3_region}"
+  bucket = "${var.s3_devops_bucket_name}"
   acl    = "private"
   tags = "${local.s3_bucket_devops_tags}"
   region = "${var.project_region}"

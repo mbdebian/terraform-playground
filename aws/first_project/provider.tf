@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "${var.s3_region}"
+  region = "${var.project_region}"
 }
 
 terraform {
@@ -7,9 +7,9 @@ terraform {
 
     backend "s3" {
       # The name of the bucket here is not the ID of that bucket in the terraform files, but the real / final bucket name on S3
-        bucket = "mbdebiandevops-myfirst-project-us-east-1"
+        bucket = "s3bucketdevopsterraform"
         key = "devops/terraform"
-        region = "us-east-1"
+        region = "${var.project_region}"
         encrypt = "true"
     }
 }
