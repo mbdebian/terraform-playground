@@ -33,6 +33,16 @@ variable "project_region" {
   description = "This is the target region for this project"
 }
 
+variable "platform_availability_zones" {
+  type = "list"
+  description = "Availability zones for the platform to be deployed"
+}
+
+variable "platform_bastion_instance_type" {
+  type = "string"
+  description = "Instance type for the bastion host"
+}
+
 // Locals, that allow interpolation
 locals {
   s3_bucket_devops_tags = {
