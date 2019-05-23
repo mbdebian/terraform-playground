@@ -38,6 +38,7 @@ resource "aws_eip" "subnet_nat" {
 
 resource "aws_nat_gateway" "subnet_nat_gateway" {
   count = "${length(var.platform_availability_zones)}"
+  // In the video, he's using aws_subnet.subnet_public, but I think it may be a bug, I think the NAT should be connected to the private subnet
   subnet_id = "${element(aws_subnet.subnet_private.*.id, count.index)}"
   allocation_id = "${element(aws_eip.subnet_nat.*.id, count.index)}"
 
