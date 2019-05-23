@@ -10,7 +10,7 @@ resource "aws_route_table" "route_table_public" {
 resource "aws_route" "public_internet_gateway" {
   route_table_id = "${aws_route_table.route_table_public.id}"
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = "${aws_internet_gateway.platform_public_gateway}"
+  gateway_id = "${aws_internet_gateway.platform_public_gateway.id}"
 }
 
 resource "aws_route_table_association" "public" {
@@ -31,9 +31,9 @@ resource "aws_route_table" "route_table_private" {
   }
 }
 
-resource "aws_route" "private_zone_nat_gateway" {
+resource "aws_route" "private_nat_gateway" {
   count = "${length(var.platform_availability_zones)}"
-  route_table_id = "${element(aws_route_table.route_table_private.*.id, index)}"
+  route_table_id = "${element(aws_route_table.route_table_private.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
   gateway_id = "${element(aws_nat_gateway.subnet_nat_gateway.*.id, count.index)}"
 }
@@ -43,5 +43,5 @@ resource "aws_route_table_association" "private" {
   count = "${length(var.platform_availability_zones)}"
 
   subnet_id = "${element(aws_subnet.subnet_private.*.id, count.index)}"
-  route_table_id = "${element(aws_route_table.route_table_private.*.id, index)}"
+  route_table_id = "${element(aws_route_table.route_table_private.*.id, count.index)}"
 }
