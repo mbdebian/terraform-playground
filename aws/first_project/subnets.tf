@@ -36,4 +36,13 @@ resource "aws_eip" "subnet_nat" {
   vpc = true
 }
 
+resource "aws_nat_gateway" "subnet_nat_gateway" {
+  count = "${length(var.platform_availability_zones)}"
+  subnet_id = "${element(aws_subnet.subnet_private.*.id, count.index)}"
+  allocation_id = "${element(aws_eip.subnet_nat.*.id, count.index)}"
+
+  tags {
+      "name" = "NAT - ${element(var.platform_availability_zones, count.index)}"
+  }
+}
 
