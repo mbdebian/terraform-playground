@@ -26,3 +26,14 @@ resource "aws_subnet" "subnet_private" {
       "name" = "Private subnet - ${element(var.platform_availability_zones, count.index)}"
   }
 }
+
+// NAT gateways, enable instances in a private subnet to connect to the Internet or other AWS services,
+// but prevent the internet from initiating a connection with those instances.
+// We create a separate NAT gateway in each AZ for high availability.
+// Each NAT gateway requires an Elastic IP
+resource "aws_eip" "subnet_nat" {
+  count = "${length(var.platform_availability_zones)}"
+  vpc = true
+}
+
+
