@@ -1,29 +1,29 @@
 // Public subnets, each subnet in a different availability zone
 resource "aws_subnet" "subnet_public" {
-  count = "${length(var.platform_availability_zones)}"
-  vpc_id = "${aws_vpc.project_vpc.id}"
-  cidr_block = "${cidrsubnet(var.vpc_cidr_block, 8, count.index)}"
-  availability_zone = "${element(var.platform_availability_zones, count.index)}"
+  count                   = "${length(var.platform_availability_zones)}"
+  vpc_id                  = "${aws_vpc.project_vpc.id}"
+  cidr_block              = "${cidrsubnet(var.vpc_cidr_block, 8, count.index)}"
+  availability_zone       = "${element(var.platform_availability_zones, count.index)}"
   map_public_ip_on_launch = true
 
   tags = {
-      "name" = "Public subnet - ${element(var.platform_availability_zones, count.index)}"
+    "name" = "Public subnet - ${element(var.platform_availability_zones, count.index)}"
   }
 }
 
 // Private subnets, each subnet in a different availability zone
 // TODO
 resource "aws_subnet" "subnet_private" {
-  count = "${length(var.platform_availability_zones)}"
+  count  = "${length(var.platform_availability_zones)}"
   vpc_id = "${aws_vpc.project_vpc.id}"
 
   // Take into account CIDR blocks allocated to the public subnets
-  cidr_block = "${cidrsubnet(var.vpc_cidr_block, 8, count.index + length(var.platform_availability_zones))}"
-  availability_zone = "${element(var.platform_availability_zones, count.index)}"
+  cidr_block              = "${cidrsubnet(var.vpc_cidr_block, 8, count.index + length(var.platform_availability_zones))}"
+  availability_zone       = "${element(var.platform_availability_zones, count.index)}"
   map_public_ip_on_launch = false
 
   tags {
-      "name" = "Private subnet - ${element(var.platform_availability_zones, count.index)}"
+    "name" = "Private subnet - ${element(var.platform_availability_zones, count.index)}"
   }
 }
 
@@ -33,17 +33,17 @@ resource "aws_subnet" "subnet_private" {
 // Each NAT gateway requires an Elastic IP
 resource "aws_eip" "subnet_nat" {
   count = "${length(var.platform_availability_zones)}"
-  vpc = true
+  vpc   = true
 }
 
 resource "aws_nat_gateway" "subnet_nat_gateway" {
   count = "${length(var.platform_availability_zones)}"
+
   // In the video, he's using aws_subnet.subnet_public, but I think it may be a bug, I think the NAT should be connected to the private subnet
-  subnet_id = "${element(aws_subnet.subnet_private.*.id, count.index)}"
+  subnet_id     = "${element(aws_subnet.subnet_private.*.id, count.index)}"
   allocation_id = "${element(aws_eip.subnet_nat.*.id, count.index)}"
 
   tags {
-      "name" = "NAT - ${element(var.platform_availability_zones, count.index)}"
+    "name" = "NAT - ${element(var.platform_availability_zones, count.index)}"
   }
 }
-

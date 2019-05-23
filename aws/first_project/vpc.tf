@@ -2,7 +2,7 @@ resource "aws_vpc" "project_vpc" {
   cidr_block = "${var.vpc_cidr_block}"
 
   tags = {
-      "name" = "Project VPC"
+    "name" = "Project VPC"
   }
 }
 
@@ -14,4 +14,3 @@ resource "aws_internet_gateway" "platform_public_gateway" {
     "name" = "Platform Public Gateway"
   }
 }
-
