@@ -40,7 +40,7 @@ resource "aws_autoscaling_group" "bastion" {
   ]
 }
 
-// Security group
+// Security groups
 resource "aws_security_group" "bastion" {
   name_prefix = "Bastion SG"
   description = "Security group for the bastion host"
@@ -49,4 +49,14 @@ resource "aws_security_group" "bastion" {
   lifecycle {
       create_before_destroy = true
   }
+}
+
+// Security rules
+resource "aws_security_group_rule" "bastion_allow_all_ssh" {
+  type = "ingress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.bastion.id}"
 }
