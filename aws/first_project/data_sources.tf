@@ -6,20 +6,20 @@ data "template_file" "bastion_public_key" {
 // AWS
 data "aws_ami" "amazon_linux" {
   most_recent = true
-  owners = ["amazon"]
+  owners      = ["amazon"]
 
   filter {
-      name = "name"
-      values = ["amzn-ami-*-x86_64-gp2"]
+    name   = "name"
+    values = ["amzn-ami-*-x86_64-gp2"]
   }
 
   filter {
-      name = "virtualization-type"
-      values = ["hvm"]
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 
   filter {
-      name = "owner-alias"
-      values = ["amazon"]
+    name   = "owner-alias"
+    values = ["amazon"]
   }
 }

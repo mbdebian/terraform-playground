@@ -44,10 +44,10 @@ resource "aws_autoscaling_group" "bastion" {
 resource "aws_security_group" "bastion" {
   name_prefix = "Bastion SG"
   description = "Security group for the bastion host"
-  vpc_id = "${aws_vpc.project_vpc.id}"
+  vpc_id      = "${aws_vpc.project_vpc.id}"
 
   lifecycle {
-      create_before_destroy = true
+    create_before_destroy = true
   }
 }
 
@@ -56,19 +56,19 @@ resource "aws_security_group" "bastion" {
 // on one hand, and where to associate / copy them on the other.
 // Although I suspect this may be overcome by the "count" method.
 resource "aws_security_group_rule" "bastion_allow_all_ssh" {
-  type = "ingress"
-  from_port = 22
-  to_port = 22
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.bastion.id}"
 }
 
 resource "aws_security_group_rule" "bastion_allow_all_outbound" {
-  type = "egress"
-  from_port = 0
-  to_port = 0
-  protocol = "-1"
-  cidr_blocks = ["0.0.0.0/0"]
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.bastion.id}"
 }
