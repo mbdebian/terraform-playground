@@ -52,6 +52,9 @@ resource "aws_security_group" "bastion" {
 }
 
 // Security rules
+// For what I see here, it is a pity that rules are not re-usable, it would be nice to have the rules defined
+// on one hand, and where to associate / copy them on the other.
+// Although I suspect this may be overcome by the "count" method.
 resource "aws_security_group_rule" "bastion_allow_all_ssh" {
   type = "ingress"
   from_port = 22
