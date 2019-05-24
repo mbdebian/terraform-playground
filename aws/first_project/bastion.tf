@@ -9,7 +9,7 @@ resource "aws_launch_configuration" "bastion" {
   // In order to update the launch configuration, terraform will destroy the existing resource and create a replacement.
   // We're only setting the name prefix here, terraform will add a random string at the end to keep it unique.
   name_prefix = "bastion-"
-
+  
   image_id                    = "${data.aws_ami.amazon_linux.id}"
   instance_type               = "${var.platform_bastion_instance_type}"
   key_name                    = "${aws_key_pair.bastion.key_name}"

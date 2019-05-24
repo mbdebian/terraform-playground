@@ -20,7 +20,7 @@ resource "aws_launch_configuration" "test" {
 }
 
 resource "aws_autoscaling_group" "test" {
-  name                 = "test-asg"
+  name                 = "${aws_launch_configuration.test.name}-asg"
   min_size             = 0
   desired_capacity     = 0
   max_size             = 1
