@@ -35,7 +35,7 @@ resource "aws_route" "private_nat_gateway" {
   count                  = "${length(var.platform_availability_zones)}"
   route_table_id         = "${element(aws_route_table.route_table_private.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = "${element(aws_nat_gateway.subnet_nat_gateway.*.id, count.index)}"
+  nat_gateway_id         = "${element(aws_nat_gateway.subnet_nat_gateway.*.id, count.index)}"
 }
 
 resource "aws_route_table_association" "private" {
