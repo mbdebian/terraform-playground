@@ -1,4 +1,4 @@
-// This file defines the test instance
+// Instance definition
 resource "aws_launch_configuration" "test" {
   // Launch configurations cannot be updated after creation with the AWS AMI,
   // In order to update a launch configuration, terraform will destroy the existing
@@ -16,4 +16,53 @@ resource "aws_launch_configuration" "test" {
   lifecycle {
       create_before_destroy = true
   }
+}
+
+resource "aws_autoscaling_group" "test" {
+  name = "test-asg"
+  min_size = 0
+  desired_capacity = 0
+  max_size = 1
+  health_check_type = "EC2"
+  launch_configuration = "${aws_launch_configuration.test.name}"
+  vpc_zone_identifier = ["${aws_subnet.subnet_private.*.id}"]
+
+    tags = [
+    {
+      key                 = "name"
+      value               = "test"
+      propagate_at_launch = true
+    },
+  ]
+
+}
+
+// Security
+
+resource "aws_security_group" "test" {
+  name_prefix = "Test SG"
+  description = "Security group for the test host"
+  vpc_id = "${aws_vpc.project_vpc.id}"
+
+  lifecycle {
+      create_before_destroy = true
+  }
+}
+// Security rules
+resource "aws_security_group_rule" "test_allow_all_ssh" {
+  type = "ingress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.test.id}"
+}
+
+resource "aws_security_group_rule" "test_allow_all_outbound" {
+  type = "egress"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.test.id}"
 }
