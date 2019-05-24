@@ -9,3 +9,7 @@ output "public_subnets" {
 output "public_cidrs" {
   value = "${aws_subnet.subnet_public.*.cidr_block}"
 }
+
+output "private_subnets" {
+  value = "${aws_subnet.subnet_private.*.id}"
+}
