@@ -5,3 +5,7 @@ output "vpc_id" {
 output "public_subnets" {
   value = "${aws_subnet.subnet_public.*.id}"
 }
+
+output "public_cidrs" {
+  value = "${aws_subnet.subnet_public.*.cidr_block}"
+}
