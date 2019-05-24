@@ -1,11 +1,12 @@
 // Public key for bastion instances
 data "template_file" "bastion_public_key" {
-  template_file = "${file("~/.ssh/sandman_rsa.pub")}"
+  template = "${file("~/.ssh/sandman_rsa.pub")}"
 }
 
 // AWS
 data "aws_ami" "amazon_linux" {
   most_recent = true
+  owners = ["amazon"]
 
   filter {
       name = "name"

@@ -38,7 +38,6 @@ resource "aws_autoscaling_group" "test" {
 }
 
 // Security
-
 resource "aws_security_group" "test" {
   name_prefix = "Test SG"
   description = "Security group for the test host"
