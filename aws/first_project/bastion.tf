@@ -23,7 +23,7 @@ resource "aws_launch_configuration" "bastion" {
 }
 
 resource "aws_autoscaling_group" "bastion" {
-  name                 = "bastion-asg"
+  name                 = "${aws_launch_configuration.bastion.name}-asg"
   min_size             = 0
   desired_capacity     = 1
   max_size             = 1
