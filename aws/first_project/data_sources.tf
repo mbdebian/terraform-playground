@@ -1,6 +1,6 @@
 // Public key for bastion instances
 data "template_file" "bastion_public_key" {
-  template = "${file("~/.ssh/sandman_rsa.pub")}"
+  template = "${file("~/.ssh/bofh_aws_terraform.pub")}"
 }
 
 // AWS
