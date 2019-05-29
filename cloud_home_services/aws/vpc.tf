@@ -8,7 +8,7 @@ resource "aws_vpc" "home_services_vpc" {
 
 // Enable access to / from internet for the instances in the public subnets
 resource "aws_internet_gateway" "internet_gateway" {
-  vpc_id = "${aws_vpc.project_vpc.id}"
+  vpc_id = "${aws_vpc.home_services_vpc.id}"
 
   tags {
     "name" = "${var.project_name} - Internet Gateway"
