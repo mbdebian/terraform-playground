@@ -13,7 +13,16 @@ resource "aws_subnet" "private" {
 }
 
 // Reserve the Elastic IPs
-resource "aws_eip" "nat" {
+resource "aws_eip" "eipnat" {
   count = "${length(var.services_availability_zones)}"
   vpc = true
+}
+
+resource "aws_nat_gateway" "nat_gateway" {
+  count = "${length(var.services_availability_zones)}"
+  subnet_id = "${element(aws_subnet.private.*.id, count.index)}"
+  allocation_id = "${element(aws_eip.eipnat.*.id, count.index)}"
+  tags {
+      "name" = "${var.project_name} - NAT Gateway - ${element(var.services_availability_zones, count.index)}"
+  }
 }
