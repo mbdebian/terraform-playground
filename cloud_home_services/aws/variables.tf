@@ -33,3 +33,8 @@ variable "vpc_cidr_block" {
   type        = "string"
   description = "CIDR block definition for the project VPC"
 }
+
+variable "services_availability_zones" {
+  type = "list"
+  description = "Availability zones that will be prepared"
+}

@@ -8,7 +8,7 @@ project_contact_email = "mbdebian@gmail.com"
 // VPC Configuration
 vpc_cidr_block = "10.0.0.0/16"
 // Subnets
-services_availability_zones = ["eu-west-3a","eu-west-3b","eu-west-3c"]
+services_availability_zones = ["eu-west-3a"]
 // Services - Time Machine Service
 service_time_machine_availability_zone = "eu-west-3a"
 service_time_machine_instance_type = "t3.small"
