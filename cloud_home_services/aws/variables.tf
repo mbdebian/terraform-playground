@@ -2,3 +2,29 @@ variable "project_region" {
   type = "string"
   description = "Where this project is supposed to run"
 }
+
+variable "project_name" {
+  type        = "string"
+  description = "Project description / display name"
+}
+
+variable "project_id" {
+  type        = "string"
+  description = "Project ID, in ID friendly format"
+}
+
+variable "project_author" {
+  type        = "string"
+  description = "Project Author name"
+}
+
+variable "project_author_email" {
+  type        = "string"
+  description = "Project author e-mail address"
+}
+
+variable "project_contact_email" {
+  type        = "string"
+  description = "Project main contact e-mail address"
+}
+
