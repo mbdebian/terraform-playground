@@ -11,3 +11,9 @@ resource "aws_subnet" "private" {
       "name" = "${var.project_name} - SUBNET (Private) - ${element(var.services_availability_zones, count.index)}"
   }
 }
+
+// Reserve the Elastic IPs
+resource "aws_eip" "nat" {
+  count = "${length(var.services_availability_zones)}"
+  vpc = true
+}
