@@ -4,9 +4,9 @@ resource "aws_s3_bucket" "s3bucketdevopsterraform" {
   tags   = "${local.s3_bucket_devops_tags}"
   region = "${var.project_region}"
 
-  lifecycle {
+  /* lifecycle {
     prevent_destroy = "true"
-  }
+  } */
 
   server_side_encryption_configuration {
     rule {
