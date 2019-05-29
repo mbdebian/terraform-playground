@@ -44,3 +44,7 @@ variable "service_time_machine_availability_zone" {
   description = "Availability zone for Time Machine Service"
 }
 
+variable "service_time_machine_instance_type" {
+  type = "string"
+  description = "Instance type for running the Time Machine Service"
+}
