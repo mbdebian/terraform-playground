@@ -27,4 +27,3 @@ variable "project_contact_email" {
   type        = "string"
   description = "Project main contact e-mail address"
 }
-
