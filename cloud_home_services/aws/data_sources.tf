@@ -1,3 +1,8 @@
+// Authorised key
+data "template_file" "bofh_management_key" {
+  template = "${file("~/.ssh/bofh_aws_terraform.pub")}"
+}
+
 data "aws_ami" "time_machine_ami" {
   most_recent = true
 
