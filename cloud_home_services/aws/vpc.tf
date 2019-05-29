@@ -1,4 +1,4 @@
-resource "aws_vpc" "project_vpc" {
+resource "aws_vpc" "home_services_vpc" {
   cidr_block = "${var.vpc_cidr_block}"
 
   tags = {
