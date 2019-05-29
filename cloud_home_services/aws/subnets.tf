@@ -18,6 +18,7 @@ resource "aws_eip" "eipnat" {
   vpc = true
 }
 
+// Create a NAT gateway per zone
 resource "aws_nat_gateway" "nat_gateway" {
   count = "${length(var.services_availability_zones)}"
   subnet_id = "${element(aws_subnet.private.*.id, count.index)}"
