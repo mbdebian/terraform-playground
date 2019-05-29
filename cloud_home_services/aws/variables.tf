@@ -27,3 +27,9 @@ variable "project_contact_email" {
   type        = "string"
   description = "Project main contact e-mail address"
 }
+
+// Networking
+variable "vpc_cidr_block" {
+  type        = "string"
+  description = "CIDR block definition for the project VPC"
+}
