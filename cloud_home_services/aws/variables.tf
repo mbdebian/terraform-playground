@@ -38,3 +38,9 @@ variable "services_availability_zones" {
   type = "list"
   description = "Availability zones that will be prepared"
 }
+
+variable "service_time_machine_availability_zone" {
+  type = "string"
+  description = "Availability zone for Time Machine Service"
+}
+
