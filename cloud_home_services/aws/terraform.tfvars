@@ -12,3 +12,4 @@ services_availability_zones = ["eu-north-1a"]
 // Services - Time Machine Service
 service_time_machine_availability_zone = "eu-north-1a"
 service_time_machine_instance_type = "t3.small"
+// Ephemeral backend
