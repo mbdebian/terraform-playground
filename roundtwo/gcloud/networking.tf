@@ -9,7 +9,7 @@ resource "google_compute_network" "vpc_idorg_prod" {
 resource "google_compute_subnetwork" "eu_deployment" {
   name          = "eu-production-subnet"
   ip_cidr_range = "10.1.0.0/16"
-  region        = "eu-west4"
+  region        = "europe-west4"
   network       = google_compute_network.vpc_idorg_prod.id
 }
 
