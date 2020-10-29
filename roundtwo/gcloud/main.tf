@@ -1,4 +1,4 @@
-# Main Infrastructure file
+# Idorg - Main Infrastructure file
 # Author: Manuel Bernal Llinares <mbdebian@gmail.com>
 
 provider "google" {
